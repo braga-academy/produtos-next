@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductsPage deve corresponder ao snapshot do estado vazio 1`] = `
+<div>
+  <div
+    class="container mx-auto py-10 space-y-6"
+  >
+    <div
+      class="flex justify-between items-center"
+    >
+      <div
+        class="space-y-1"
+      >
+        <h1
+          class="text-3xl font-bold tracking-tight"
+        >
+          Produtos
+        </h1>
+        <p
+          class="text-sm text-muted-foreground"
+        >
+          Gerencie seus produtos e estoque
+        </p>
+      </div>
+      <button
+        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 cursor-pointer"
+        data-slot="button"
+        data-testid="create-product-button"
+      >
+        <svg
+          aria-hidden="true"
+          class="lucide lucide-plus mr-2 h-4 w-4"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5 12h14"
+          />
+          <path
+            d="M12 5v14"
+          />
+        </svg>
+        Novo Produto
+      </button>
+    </div>
+    <div
+      class="space-y-4"
+    >
+      <div
+        class="flex gap-4"
+      >
+        <div
+          class="relative flex-1"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-search absolute left-2 top-2.5 h-4 w-4 text-muted-foreground"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m21 21-4.34-4.34"
+            />
+            <circle
+              cx="11"
+              cy="11"
+              r="8"
+            />
+          </svg>
+          <input
+            class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive pl-8"
+            data-slot="input"
+            data-testid="search-input"
+            placeholder="Buscar produtos..."
+            value=""
+          />
+        </div>
+        <button
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2 has-[>svg]:px-3 gap-2"
+          data-slot="button"
+          data-testid="toggle-filters"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-funnel h-4 w-4"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"
+            />
+          </svg>
+          Filtros
+        </button>
+      </div>
+    </div>
+    <div
+      class="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm border-dashed"
+      data-slot="card"
+    >
+      <div
+        class="px-6 pt-6"
+        data-slot="card-content"
+      >
+        <div
+          class="flex flex-col items-center justify-center text-center space-y-4 py-12"
+        >
+          <div
+            class="rounded-full bg-muted p-4"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-shopping-cart h-12 w-12 text-muted-foreground"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="8"
+                cy="21"
+                r="1"
+              />
+              <circle
+                cx="19"
+                cy="21"
+                r="1"
+              />
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              />
+            </svg>
+          </div>
+          <div
+            class="space-y-2"
+          >
+            <h3
+              class="text-lg font-semibold"
+            >
+              Nenhum produto cadastrado
+            </h3>
+            <p
+              class="text-sm text-muted-foreground"
+            >
+              Comece adicionando seu primeiro produto
+            </p>
+          </div>
+          <button
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 gap-2"
+            data-slot="button"
+            data-testid="empty-create-button"
+          >
+            <svg
+              aria-hidden="true"
+              class="lucide lucide-plus h-4 w-4"
+              fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 12h14"
+              />
+              <path
+                d="M12 5v14"
+              />
+            </svg>
+            Novo Produto
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
