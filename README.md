@@ -1,5 +1,7 @@
 # Documentação do Projeto - Teste Técnico Frontend
 
+![Screenshot da aplicação](screenshot.png)
+
 ## Visão Geral
 Este projeto é uma aplicação de gerenciamento de produtos desenvolvida como teste técnico, implementando as funcionalidades solicitadas utilizando Next.js, TypeScript e Tailwind CSS.
 
