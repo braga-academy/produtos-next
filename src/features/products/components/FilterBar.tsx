@@ -5,6 +5,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Search, X, Filter, Calendar, Tag, ShoppingCart, DollarSign } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { useProductFilters } from '../hooks/useProductFilters'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/core/store'
 
 interface FilterBarProps {
     onClearFilters: () => void
@@ -22,6 +24,7 @@ export function FilterBar({ onClearFilters, hasActiveFilters, initialSearchValue
         handleDateFilter,
         handlePriceFilter,
     } = useProductFilters()
+    const filters = useSelector((state: RootState) => state.products.filters)
 
     const onSearch = (value: string) => {
         setSearchValue(value)
@@ -83,15 +86,18 @@ export function FilterBar({ onClearFilters, hasActiveFilters, initialSearchValue
                             <ShoppingCart className="h-4 w-4" />
                             Estoque
                         </label>
-                        <Select onValueChange={handleStockFilter}>
-                            <SelectTrigger>
-                                <SelectValue placeholder="Todos" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">Todos</SelectItem>
-                                <SelectItem value="outOfStock">Sem estoque</SelectItem>
-                            </SelectContent>
-                        </Select>
+                        <div className="flex items-center gap-2 mt-1">
+                            <input
+                                type="checkbox"
+                                id="outOfStock"
+                                checked={filters.stockFilter === 'outOfStock'}
+                                onChange={e => handleStockFilter(e.target.checked ? 'outOfStock' : 'all')}
+                                className="accent-yellow-500 h-4 w-4"
+                            />
+                            <label htmlFor="outOfStock" className="text-sm select-none cursor-pointer">
+                                Apenas sem estoque
+                            </label>
+                        </div>
                     </div>
 
                     <div className="space-y-2">
