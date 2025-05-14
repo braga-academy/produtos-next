@@ -18,7 +18,7 @@ export function useProductFilters () {
     }, [debouncedSearch])
 
     const handleCategoryChange = useCallback((value: string) => {
-        dispatch(setFilters({ category: value }))
+        dispatch(setFilters({ category: value === 'all' ? '' : value }))
     }, [dispatch])
 
     const handleStockFilter = useCallback((value: 'all' | 'outOfStock') => {
@@ -28,22 +28,35 @@ export function useProductFilters () {
     const handleDateFilter = useCallback((value: string) => {
         const now = new Date()
         let startDate = new Date()
+        let endDate = ''
 
         switch (value) {
+            case 'today':
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+                endDate = ''
+                break
+            case 'yesterday':
+                startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
+                endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
+                break
             case 'last7days':
                 startDate.setDate(now.getDate() - 7)
+                endDate = ''
                 break
             case 'last30days':
                 startDate.setDate(now.getDate() - 30)
+                endDate = ''
                 break
             case 'last90days':
                 startDate.setDate(now.getDate() - 90)
+                endDate = ''
                 break
             default:
                 startDate = new Date(0)
+                endDate = ''
         }
 
-        dispatch(setFilters({ startDate: startDate.toISOString() }))
+        dispatch(setFilters({ startDate: startDate.toISOString(), endDate }))
     }, [dispatch])
 
     const handlePriceFilter = useCallback((value: string) => {

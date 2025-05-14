@@ -67,7 +67,7 @@ export function FilterBar({ onClearFilters, hasActiveFilters, initialSearchValue
                             <Tag className="h-4 w-4" />
                             Categoria
                         </label>
-                        <Select onValueChange={handleCategoryChange}>
+                        <Select onValueChange={handleCategoryChange} value={filters.category === '' ? 'all' : filters.category}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Todas as categorias" />
                             </SelectTrigger>
@@ -105,7 +105,7 @@ export function FilterBar({ onClearFilters, hasActiveFilters, initialSearchValue
                             <DollarSign className="h-4 w-4" />
                             Preço
                         </label>
-                        <Select onValueChange={handlePriceFilter}>
+                        <Select onValueChange={handlePriceFilter} value={filters.minPrice === 0 && filters.maxPrice === 0 ? 'all' : filters.minPrice === 0 && filters.maxPrice === 100 ? 'under100' : filters.minPrice === 100 && filters.maxPrice === 500 ? '100to500' : filters.minPrice === 500 && filters.maxPrice === 1000 ? '500to1000' : filters.minPrice === 1000 && filters.maxPrice === 0 ? 'over1000' : 'all'}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Todos os preços" />
                             </SelectTrigger>
@@ -124,12 +124,14 @@ export function FilterBar({ onClearFilters, hasActiveFilters, initialSearchValue
                             <Calendar className="h-4 w-4" />
                             Data
                         </label>
-                        <Select onValueChange={handleDateFilter}>
+                        <Select onValueChange={handleDateFilter} value={filters.startDate === '' ? 'all' : filters.startDate === new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).toISOString() ? 'today' : filters.startDate === new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1).toISOString() && filters.endDate ? 'yesterday' : filters.startDate === (() => { let d = new Date(); d.setDate(d.getDate() - 7); return d.toISOString(); })() ? 'last7days' : filters.startDate === (() => { let d = new Date(); d.setDate(d.getDate() - 30); return d.toISOString(); })() ? 'last30days' : filters.startDate === (() => { let d = new Date(); d.setDate(d.getDate() - 90); return d.toISOString(); })() ? 'last90days' : 'all'}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Todas as datas" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="all">Todas as datas</SelectItem>
+                                <SelectItem value="today">Hoje</SelectItem>
+                                <SelectItem value="yesterday">Ontem</SelectItem>
                                 <SelectItem value="last7days">Últimos 7 dias</SelectItem>
                                 <SelectItem value="last30days">Últimos 30 dias</SelectItem>
                                 <SelectItem value="last90days">Últimos 90 dias</SelectItem>

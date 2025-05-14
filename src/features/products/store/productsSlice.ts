@@ -19,6 +19,7 @@ interface Filters {
     maxPrice: number
     stockFilter: 'all' | 'outOfStock'
     startDate: string
+    endDate?: string
 }
 
 interface ProductsState {
@@ -46,6 +47,7 @@ const initialState: ProductsState = {
         maxPrice: 0,
         stockFilter: 'all',
         startDate: '',
+        endDate: '',
     },
     pagination: {
         page: 1,
@@ -63,7 +65,12 @@ const applyFilters = (items: Product[], filters: Filters): Product[] => {
             (!filters.maxPrice || item.price <= filters.maxPrice)
         const matchesStock = filters.stockFilter === 'all' ||
             (filters.stockFilter === 'outOfStock' && item.stock === 0)
-        const matchesDate = !filters.startDate || new Date(item.createdAt) >= new Date(filters.startDate)
+        let matchesDate = true
+        if (filters.startDate && filters.endDate) {
+            matchesDate = new Date(item.createdAt) >= new Date(filters.startDate) && new Date(item.createdAt) < new Date(filters.endDate)
+        } else if (filters.startDate) {
+            matchesDate = new Date(item.createdAt) >= new Date(filters.startDate)
+        }
 
         return matchesSearch && matchesCategory && matchesPrice && matchesStock && matchesDate
     })
@@ -104,6 +111,9 @@ const productsSlice = createSlice({
             }
             if (action.payload.startDate === '') {
                 updatedFilters.startDate = ''
+            }
+            if (action.payload.endDate === '') {
+                updatedFilters.endDate = ''
             }
 
             state.filters = updatedFilters
