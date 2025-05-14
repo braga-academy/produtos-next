@@ -6,7 +6,6 @@ import { ProductModal } from '../ProductModal'
 import productsReducer from '../../store/productsSlice'
 import { expect } from '@jest/globals'
 
-// Mock do store
 const createMockStore = () => {
     return configureStore({
         reducer: {
@@ -15,10 +14,8 @@ const createMockStore = () => {
     })
 }
 
-// Mock do dispatch
 const mockDispatch = jest.fn()
 
-// Mock do useDispatch
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: () => mockDispatch,
@@ -113,7 +110,6 @@ describe('ProductModal', () => {
             </Provider>
         )
 
-        // Preenche o formulário
         fireEvent.change(screen.getByRole('textbox', { name: /nome/i }), {
             target: { value: 'Novo Produto' },
         })
@@ -124,21 +120,18 @@ describe('ProductModal', () => {
             target: { value: 'https://exemplo.com/nova-imagem.jpg' },
         })
 
-        // Seleciona categoria
         const selectTrigger = screen.getByRole('combobox', { name: /categoria/i })
         fireEvent.click(selectTrigger)
 
         const categoryOption = screen.getByRole('option', { name: 'Eletrônicos' })
         fireEvent.click(categoryOption)
 
-        // Preenche preço e estoque
         const priceInput = screen.getByRole('textbox', { name: /preço/i })
         fireEvent.change(priceInput, { target: { value: '99.99' } })
 
         const stockInput = screen.getByRole('spinbutton', { name: /estoque/i })
         fireEvent.change(stockInput, { target: { value: '10' } })
 
-        // Submete o formulário
         fireEvent.click(screen.getByRole('button', { name: 'Salvar' }))
 
         await waitFor(() => {
@@ -166,12 +159,10 @@ describe('ProductModal', () => {
             </Provider>
         )
 
-        // Atualiza o nome do produto
         fireEvent.change(screen.getByRole('textbox', { name: /nome/i }), {
             target: { value: 'Produto Atualizado' },
         })
 
-        // Submete o formulário
         fireEvent.click(screen.getByRole('button', { name: 'Salvar' }))
 
         await waitFor(() => {

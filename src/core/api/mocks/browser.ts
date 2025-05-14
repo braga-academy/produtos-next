@@ -3,7 +3,6 @@ import { handlers } from './handlers'
 
 export const worker = setupWorker(...handlers)
 
-// Configuração do service worker
 if (typeof window !== 'undefined') {
     worker.start({
         serviceWorker: {

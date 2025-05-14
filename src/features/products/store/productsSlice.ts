@@ -92,10 +92,8 @@ const productsSlice = createSlice({
             state.error = action.payload
         },
         setFilters: (state, action: PayloadAction<Partial<ProductsState['filters']>>) => {
-            // Manter os filtros existentes e atualizar apenas os novos
             const updatedFilters = { ...state.filters, ...action.payload }
 
-            // Se estiver limpando um filtro específico, garantir que o valor seja resetado corretamente
             if (action.payload.search === '') {
                 updatedFilters.search = ''
             }
@@ -117,12 +115,10 @@ const productsSlice = createSlice({
             }
 
             state.filters = updatedFilters
-            state.pagination.page = 1 // Resetar página ao filtrar
+            state.pagination.page = 1
 
-            // Aplicar filtros
             state.filteredItems = applyFilters(state.items, state.filters)
 
-            // Atualizar total de itens filtrados
             state.pagination.total = state.filteredItems.length
         },
         setPagination: (state, action: PayloadAction<Partial<ProductsState['pagination']>>) => {
@@ -138,7 +134,6 @@ const productsSlice = createSlice({
             if (index !== -1) {
                 state.items[index] = action.payload
             }
-            // Sempre reaplica os filtros após atualizar
             state.filteredItems = applyFilters(state.items, state.filters)
             state.pagination.total = state.filteredItems.length
         },

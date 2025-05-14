@@ -4,14 +4,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import ProductsPage from '../page'
 import productsReducer from '@/features/products/store/productsSlice'
 
-// Mock do useToast
 jest.mock('@/components/ui/use-toast', () => ({
     useToast: () => ({
         toast: jest.fn(),
     }),
 }))
 
-// Mock do dispatch
 const mockDispatch = jest.fn()
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -71,7 +69,6 @@ describe('ProductsPage', () => {
                 <ProductsPage />
             </Provider>
         )
-        // Verifica se existem elementos de skeleton
         const skeletons = document.querySelectorAll('[data-slot="skeleton"]')
         expect(skeletons.length).toBeGreaterThan(0)
     })
@@ -83,7 +80,6 @@ describe('ProductsPage', () => {
                 <ProductsPage />
             </Provider>
         )
-        // Busca pelo título do erro
         expect(screen.getByRole('heading', { name: errorMessage })).toBeInTheDocument()
     })
 
@@ -115,15 +111,12 @@ describe('ProductsPage', () => {
             </Provider>
         )
 
-        // Verifica se a tabela está presente
         const table = screen.getByRole('table')
         expect(table).toBeInTheDocument()
 
-        // Verifica se o produto está na tabela
         const rows = screen.getAllByRole('row')
-        expect(rows).toHaveLength(2) // Header + 1 produto
+        expect(rows).toHaveLength(2)
 
-        // Verifica o conteúdo da linha do produto
         const productRow = rows[1]
         expect(productRow).toHaveTextContent('Produto Teste')
         expect(productRow).toHaveTextContent('R$ 99,99')
@@ -142,14 +135,12 @@ describe('ProductsPage', () => {
         const newProductButtons = screen.getAllByRole('button', { name: 'Novo Produto' })
         fireEvent.click(newProductButtons[0])
 
-        // Verifica se o modal está aberto
         const modal = screen.getByRole('dialog')
         expect(modal).toBeInTheDocument()
         expect(modal).toHaveAttribute('data-state', 'open')
     })
 
     it('deve filtrar produtos ao digitar na busca', () => {
-        // Mock do dispatch para retornar a ação correta
         mockDispatch.mockImplementation((action) => {
             if (action.type === 'products/setFilters') {
                 return { type: 'products/setFilters', payload: { search: 'teste' } }
@@ -175,7 +166,6 @@ describe('ProductsPage', () => {
     })
 
     it('deve exibir a visualização mobile em telas pequenas', () => {
-        // Simula uma tela mobile
         window.innerWidth = 375
         window.dispatchEvent(new Event('resize'))
 
@@ -201,15 +191,12 @@ describe('ProductsPage', () => {
             </Provider>
         )
 
-        // Verifica se a visualização mobile está presente
         const mobileView = document.querySelector('.md\\:hidden')
         expect(mobileView).toBeInTheDocument()
 
-        // Verifica se o produto está na visualização mobile usando getAllByText
         const productNames = screen.getAllByText('Produto Teste')
         expect(productNames.length).toBeGreaterThan(0)
 
-        // Verifica o preço na visualização mobile
         const prices = screen.getAllByText('R$ 99,99')
         expect(prices.length).toBeGreaterThan(0)
     })

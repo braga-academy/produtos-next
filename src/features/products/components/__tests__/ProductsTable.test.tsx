@@ -58,7 +58,6 @@ describe('ProductsTable', () => {
             />
         )
 
-        // Encontra o botão de editar pelo ícone e pelo produto
         const productCards = screen.getAllByText('Produto Teste 1')
             .map(element => element.closest('[data-slot="card"]'))
             .filter(Boolean)
@@ -78,7 +77,6 @@ describe('ProductsTable', () => {
             />
         )
 
-        // Encontra o botão de excluir pelo ícone e pelo produto
         const productCards = screen.getAllByText('Produto Teste 1')
             .map(element => element.closest('[data-slot="card"]'))
             .filter(Boolean)
@@ -86,10 +84,8 @@ describe('ProductsTable', () => {
         expect(deleteButton).toBeTruthy()
         fireEvent.click(deleteButton!)
 
-        // Verifica se o modal de confirmação é exibido
         expect(screen.getByRole('dialog')).toBeInTheDocument()
 
-        // Simula a confirmação da exclusão
         const confirmButton = screen.getByRole('button', { name: /excluir/i })
         fireEvent.click(confirmButton)
 
@@ -105,19 +101,15 @@ describe('ProductsTable', () => {
             />
         )
 
-        // Verifica se o seletor de itens por página está presente
         const select = screen.getByRole('combobox')
         expect(select).toBeInTheDocument()
         expect(screen.getByText('Itens por página:')).toBeInTheDocument()
 
-        // Abre o menu de seleção
         fireEvent.click(select)
 
-        // Seleciona uma nova opção
         const option = screen.getByText('20')
         fireEvent.click(option)
 
-        // Verifica se a opção foi selecionada
         expect(screen.getByText('20')).toBeInTheDocument()
     })
 
@@ -130,16 +122,14 @@ describe('ProductsTable', () => {
             />
         )
 
-        // Verifica se a imagem do primeiro produto está presente
         const images = screen.getAllByAltText('Produto Teste 1')
-        expect(images).toHaveLength(2) // mobile e desktop
+        expect(images).toHaveLength(2)
         images.forEach(image => {
             expect(image).toHaveAttribute('src', 'https://exemplo.com/imagem1.jpg')
         })
 
-        // Verifica se a mensagem "Sem imagem" está presente para o segundo produto
         const noImageTexts = screen.getAllByText('Sem imagem')
-        expect(noImageTexts).toHaveLength(2) // mobile e desktop
+        expect(noImageTexts).toHaveLength(2)
     })
 
     it('deve mostrar badge de estoque com estilo diferente quando estoque é zero', () => {
@@ -151,16 +141,14 @@ describe('ProductsTable', () => {
             />
         )
 
-        // Verifica se o badge de estoque zero tem a classe correta
         const zeroStockBadges = screen.getAllByText('0 unidades')
-        expect(zeroStockBadges).toHaveLength(2) // mobile e desktop
+        expect(zeroStockBadges).toHaveLength(2)
         zeroStockBadges.forEach(badge => {
             expect(badge.closest('.bg-yellow-100')).toBeInTheDocument()
         })
 
-        // Verifica se o badge de estoque normal não tem a classe de alerta
         const normalStockBadges = screen.getAllByText('10 unidades')
-        expect(normalStockBadges).toHaveLength(2) // mobile e desktop
+        expect(normalStockBadges).toHaveLength(2)
         normalStockBadges.forEach(badge => {
             expect(badge.closest('.bg-yellow-100')).not.toBeInTheDocument()
         })
@@ -175,11 +163,9 @@ describe('ProductsTable', () => {
             />
         )
 
-        // Verifica se os nomes dos produtos estão visíveis
         const productNames = screen.getAllByText(/Produto Teste \d/)
-        expect(productNames).toHaveLength(4) // 2 produtos x 2 views (mobile e desktop)
+        expect(productNames).toHaveLength(4)
 
-        // Verifica se cada produto aparece duas vezes (mobile e desktop)
         const product1Count = productNames.filter(name => name.textContent === 'Produto Teste 1').length
         const product2Count = productNames.filter(name => name.textContent === 'Produto Teste 2').length
         expect(product1Count).toBe(2)
@@ -195,9 +181,8 @@ describe('ProductsTable', () => {
             />
         )
 
-        // Verifica se as categorias estão visíveis
         const categories = screen.getAllByText(/Categoria \d/)
-        expect(categories).toHaveLength(6) // 2 produtos x 3 views (mobile, desktop e dentro do card)
+        expect(categories).toHaveLength(6)
         const category1Count = categories.filter(cat => cat.textContent === 'Categoria 1').length
         const category2Count = categories.filter(cat => cat.textContent === 'Categoria 2').length
         expect(category1Count).toBe(3)
@@ -213,9 +198,8 @@ describe('ProductsTable', () => {
             />
         )
 
-        // Verifica se as descrições estão visíveis
         const descriptions = screen.getAllByText(/Descrição do produto \d/)
-        expect(descriptions).toHaveLength(4) // 2 produtos x 2 views (mobile e desktop)
+        expect(descriptions).toHaveLength(4)
         const description1Count = descriptions.filter(desc => desc.textContent === 'Descrição do produto 1').length
         const description2Count = descriptions.filter(desc => desc.textContent === 'Descrição do produto 2').length
         expect(description1Count).toBe(2)

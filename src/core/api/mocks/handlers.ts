@@ -1,23 +1,18 @@
 import { http, HttpResponse } from 'msw'
 import { Product } from '@/features/products/store/productsSlice'
 
-// Função auxiliar para gerar um ID único
 const generateId = () => Math.random().toString(36).substr(2, 9)
 
-// Função auxiliar para gerar uma data aleatória nos últimos 30 dias
 const generateRandomDate = () => {
     const date = new Date()
     date.setDate(date.getDate() - Math.floor(Math.random() * 30))
     return date.toISOString()
 }
 
-// Função auxiliar para gerar um preço aleatório entre 10 e 1000
 const generateRandomPrice = () => Number((Math.random() * 990 + 10).toFixed(2))
 
-// Função auxiliar para gerar um estoque aleatório entre 0 e 100
 const generateRandomStock = () => Math.floor(Math.random() * 100)
 
-// Categorias predefinidas
 const categories = [
     'Eletrônicos',
     'Informática',
@@ -31,7 +26,6 @@ const categories = [
     'Smart Home',
 ]
 
-// Gerar uma massa de dados de produtos
 const generateProducts = (count: number): Product[] => {
     return Array.from({ length: count }, (_, index) => ({
         id: generateId(),
@@ -46,16 +40,13 @@ const generateProducts = (count: number): Product[] => {
     }))
 }
 
-// Simulando um banco de dados em memória com 100 produtos
 let products: Product[] = generateProducts(100)
 
 export const handlers = [
-    // Listar produtos
     http.get('/api/products', () => {
         return HttpResponse.json(products)
     }),
 
-    // Criar produto
     http.post('/api/products', async ({ request }) => {
         const newProduct = await request.json() as Partial<Product>
         const product: Product = {
@@ -73,7 +64,6 @@ export const handlers = [
         return HttpResponse.json(product)
     }),
 
-    // Atualizar produto
     http.put('/api/products/:id', async ({ params, request }) => {
         const { id } = params
         const updatedData = await request.json() as Partial<Product>
@@ -99,7 +89,6 @@ export const handlers = [
         return HttpResponse.json(updatedProduct)
     }),
 
-    // Excluir produto
     http.delete('/api/products/:id', ({ params }) => {
         const { id } = params
         const productIndex = products.findIndex((p) => p.id === id)
